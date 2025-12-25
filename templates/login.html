@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Вход в систему</h1>
+
+<form method="POST" action="{{ url_for('login') }}">
+    <div class="form-group">
+        <label>Логин:</label>
+        <input type="text" name="username" placeholder="Введите логин" required>
+    </div>
+    
+    <div class="form-group">
+        <label>Пароль:</label>
+        <input type="password" name="password" placeholder="Введите пароль" required>
+    </div>
+    
+    <button type="submit">Войти</button>
+</form>
+
+<div class="links">
+    <p>Нет аккаунта? <a href="{{ url_for('register') }}">Зарегистрируйтесь</a></p>
+</div>
+
+<div style="margin-top: 30px; padding: 15px; background: #fff3cd; border-radius: 4px;">
+    <p><strong>Тестовые данные:</strong></p>
+    <p>Логин: <code>admin</code> | Пароль: <code>admin123</code></p>
+    <p>Логин: <code>ivan.petrov</code> | Пароль: <code>password123</code></p>
+</div>
+{% endblock %}

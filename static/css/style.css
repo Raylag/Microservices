@@ -1,0 +1,182 @@
+/* Custom Styles for User Management App */
+
+/* Body and background */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background-attachment: fixed;
+}
+
+/* Card styling */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.card-header {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 1.5rem;
+}
+
+/* Form styling */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    padding: 12px 15px;
+    transition: all 0.3s;
+}
+
+.form-control:focus {
+    border-color: #4b6cb7;
+    box-shadow: 0 0 0 0.25rem rgba(75, 108, 183, 0.25);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Button styling */
+.btn {
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #3a5ca9 0%, #121f3d 100%);
+    transform: scale(1.05);
+}
+
+/* Profile page styling */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.profile-info-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.info-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.info-value {
+    color: #6c757d;
+}
+
+/* Hero section on index page */
+.hero-section {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    color: white;
+    padding: 5rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Feature cards */
+.feature-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 15px;
+    height: 100%;
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+/* Status badges */
+.status-badge {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.status-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-inactive {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-blocked {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section {
+        padding: 3rem 1rem;
+    }
+}

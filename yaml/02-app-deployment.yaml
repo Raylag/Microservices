@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-app-deployment
+  namespace: user-platform-exam
+  labels:
+    app: user-management
+    component: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-management
+      component: frontend
+  template:
+    metadata:
+      labels:
+        app: user-management
+        component: frontend
+        tier: web
+    spec:
+      containers:
+      - name: user-app
+        image: user-management-app:simple
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: APP_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_NAME
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-app-service
+  namespace: user-platform-exam
+  labels:
+    app: user-management
+    component: frontend-service
+spec:
+  selector:
+    app: user-management
+    component: frontend
+  ports:
+  - port: 5000
+    targetPort: 5000
+  type: ClusterIP

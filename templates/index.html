@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Главная страница</h1>
+
+<div style="text-align: center; margin: 40px 0;">
+    <h2>Приложение управления пользователями</h2>
+    <p>Тестовое приложение для экзамена по Kubernetes</p>
+    <p>Функции: регистрация, авторизация, управление профилем</p>
+</div>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 30px 0;">
+    <h3>Доступные функции:</h3>
+    <ul>
+        <li>✅ Авторизация по логину и паролю</li>
+        <li>✅ Регистрация новых пользователей</li>
+        <li>✅ Просмотр личного профиля</li>
+        <li>✅ Разные статусы пользователей</li>
+        <li>✅ База данных SQLite</li>
+    </ul>
+</div>
+
+<div style="text-align: center;">
+    {% if not session.username %}
+        <a href="{{ url_for('login') }}" style="display: inline-block; margin: 10px; padding: 12px 24px; background: #28a745; color: white; text-decoration: none; border-radius: 4px;">
+            Войти в систему
+        </a>
+        <a href="{{ url_for('register') }}" style="display: inline-block; margin: 10px; padding: 12px 24px; background: #17a2b8; color: white; text-decoration: none; border-radius: 4px;">
+            Зарегистрироваться
+        </a>
+    {% else %}
+        <a href="{{ url_for('profile') }}" style="display: inline-block; margin: 10px; padding: 12px 24px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">
+            Перейти в профиль
+        </a>
+    {% endif %}
+</div>
+{% endblock %}

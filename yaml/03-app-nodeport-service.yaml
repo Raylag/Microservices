@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-app-nodeport
+  namespace: user-platform-exam
+  labels:
+    app: user-management
+    component: frontend-nodeport
+spec:
+  selector:
+    app: user-management
+    component: frontend
+  ports:
+  - port: 80
+    targetPort: 5000
+    nodePort: 30080  # Будет доступно на <IP ноды>:30080
+  type: NodePort

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: user-platform-exam
+data:
+  APP_NAME: "User Management Platform"
+  ENVIRONMENT: "exam"
+  THEME_COLOR: "primary"
+  MAX_USERS: "1000"

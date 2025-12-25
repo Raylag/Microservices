@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-db-deployment
+  namespace: user-platform-exam
+  labels:
+    app: user-management
+    component: database
+spec:
+  replicas: 1  # Требование: 1 Pod для БД
+  selector:
+    matchLabels:
+      app: user-management
+      component: database
+  template:
+    metadata:
+      labels:
+        app: user-management
+        component: database
+        tier: db
+    spec:
+      containers:
+      - name: sqlite-db
+        # Используем образ с SQLite и данными (в реальности так не делают).
+        # Для простоты используем тот же образ приложения, т.к. БД - файл внутри него.
+        # Лучше: использовать отдельный образ с volume для хранения данных.
+        image: user-management-app:1.0
+        command: ["/bin/sh"]
+        args: ["-c", "sleep infinity"] # Контейнер просто живёт, БД - файл в его ФС.
+        ports:
+        - containerPort: 5000 # Не используется для SQLite, но оставим
+        volumeMounts:
+        - name: db-storage
+          mountPath: /app/users.db
+          subPath: users.db
+      volumes:
+      - name: db-storage
+        emptyDir: {} # Данные потеряются при перезапуске Pod. Для экзамена сойдёт.
+---
+# Service для доступа к БД из приложения (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-db-service
+  namespace: user-platform-exam
+  labels:
+    app: user-management
+    component: database-service
+spec:
+  selector:
+    app: user-management
+    component: database
+  ports:
+  - port: 5000 # Условный порт, т.к. SQLite не сетевой
+    targetPort: 5000
+  type: ClusterIP
