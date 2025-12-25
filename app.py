@@ -6,7 +6,6 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 DATABASE = 'users.db'
 
-# --- Функции для работы с БД ---
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -18,7 +17,6 @@ def init_db():
     with app.app_context():
         db = get_db()
         cursor = db.cursor()
-        # Таблица пользователей с состоянием
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,7 +28,6 @@ def init_db():
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
-        # Добавляем тестового пользователя, если база пуста
         cursor.execute("SELECT COUNT(*) as count FROM users")
         if cursor.fetchone()['count'] == 0:
             cursor.execute("INSERT INTO users (username, password, full_name, email) VALUES (?, ?, ?, ?)",
@@ -47,7 +44,6 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-# --- Маршруты ---
 @app.route('/')
 def index():
     """Главная страница"""
@@ -132,7 +128,6 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    # Инициализируем БД при первом запуске, если её нет
     if not os.path.exists(DATABASE):
         init_db()
     app.run(host='0.0.0.0', port=5000, debug=True)
