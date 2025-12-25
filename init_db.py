@@ -10,20 +10,17 @@ from datetime import datetime
 
 def init_database():
     """Инициализирует базу данных и создает таблицы"""
-    
-    # Удаляем старую базу данных, если она существует (для чистоты тестирования)
+ 
     if os.path.exists('users.db'):
         print("⚠️  Обнаружена существующая база данных. Удаляю...")
         os.remove('users.db')
         print("✅ Старая база данных удалена")
-    
-    # Подключаемся к базе данных (она создастся автоматически)
+
     connection = sqlite3.connect('users.db')
     cursor = connection.cursor()
     
     print("🔧 Создаю таблицу users...")
-    
-    # Создаем таблицу пользователей
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,12 +34,10 @@ def init_database():
     ''')
     
     print("✅ Таблица users создана успешно")
-    
-    # Добавляем тестовых пользователей
+
     print("👥 Добавляю тестовых пользователей...")
     
     test_users = [
-        # (username, password, full_name, email, status)
         ('admin', 'admin123', 'Администратор Системы', 'admin@company.com', 'active'),
         ('ivan.petrov', 'password123', 'Иван Петров', 'ivan.petrov@example.com', 'active'),
         ('maria.sidorova', 'qwerty456', 'Мария Сидорова', 'maria.sidorova@example.com', 'active'),
@@ -62,14 +57,12 @@ def init_database():
         ''', test_users)
         
         connection.commit()
-        
-        # Получаем количество добавленных пользователей
+  
         cursor.execute("SELECT COUNT(*) FROM users")
         count = cursor.fetchone()[0]
         
         print(f"✅ Успешно добавлено {count} тестовых пользователей")
-        
-        # Выводим информацию о добавленных пользователях
+
         print("\n📋 Список добавленных пользователей:")
         print("-" * 80)
         print(f"{'ID':<4} {'Username':<20} {'Full Name':<25} {'Status':<12} {'Email':<30}")
@@ -82,8 +75,7 @@ def init_database():
             print(f"{user[0]:<4} {user[1]:<20} {user[2]:<25} {user[3]:<12} {user[4]:<30}")
         
         print("-" * 80)
-        
-        # Добавляем дополнительную информацию
+
         cursor.execute("SELECT status, COUNT(*) FROM users GROUP BY status")
         print("\n📊 Статистика по статусам:")
         for status, count in cursor.fetchall():
@@ -116,7 +108,6 @@ def verify_database():
     cursor = connection.cursor()
     
     try:
-        # Проверяем структуру таблицы
         cursor.execute("PRAGMA table_info(users)")
         columns = cursor.fetchall()
         
@@ -130,7 +121,6 @@ def verify_database():
         
         print("-" * 60)
         
-        # Проверяем наличие данных
         cursor.execute("SELECT COUNT(*) FROM users")
         count = cursor.fetchone()[0]
         
@@ -155,8 +145,7 @@ def main():
     print("=" * 60)
     print("📁 Текущая директория:", os.getcwd())
     print()
-    
-    # Инициализируем базу данных
+
     if init_database():
         print("\n" + "=" * 60)
         print("ПРОВЕРКА КОРРЕКТНОСТИ ИНИЦИАЛИЗАЦИИ")
